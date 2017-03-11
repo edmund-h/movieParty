@@ -16,6 +16,10 @@ class CollectionCellView: UICollectionViewCell {
             if let movie = movie{
                 posterLabel.text = movie.title + "-" + movie.year
                 print("labels for movie cell should be set")
+                //posterLabel.adjustsFontForContentSizeCategory = true
+                posterLabel.numberOfLines = 0
+                posterLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+                //posterLabel.adjustsFontSizeToFitWidth = true
             }
         }
     }

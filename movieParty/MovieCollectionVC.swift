@@ -68,6 +68,8 @@ class MovieCollectionVC: UICollectionViewController, DataStoreDelegate {
         self.collectionView?.reloadData()
     }
     
+    //TODO: implement image searching for onscreen cells
+    
     @IBAction func searchButtonPressed(_ sender: UIBarButtonItem) {
         guard let searchString = globalMovieSearchBar.text else {return}
         globalMovieSearchBar.text = ""
@@ -81,7 +83,13 @@ class MovieCollectionVC: UICollectionViewController, DataStoreDelegate {
         
     }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let origin = sender as? CollectionCellView else {return}
+        guard let movieToDisplay = origin.movie else {return}
+        DispatchQueue.main.async {
+            OmdbApiClient.getASpecificMovie(titleSearch: movieToDisplay.title)
+        }
+    }//segue preparation triggers search for add'tl info.
     
     
     
