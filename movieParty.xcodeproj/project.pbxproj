@@ -558,6 +558,7 @@
 				88376D3D1E73259900D80438 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		88376D3E1E73259900D80438 /* Build configuration list for PBXNativeTarget "moviePartyTests" */ = {
 			isa = XCConfigurationList;
@@ -566,6 +567,7 @@
 				88376D401E73259900D80438 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		88376D411E73259900D80438 /* Build configuration list for PBXNativeTarget "moviePartyUITests" */ = {
 			isa = XCConfigurationList;
@@ -574,6 +576,7 @@
 				88376D431E73259900D80438 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
