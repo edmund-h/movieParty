@@ -23,11 +23,13 @@ class ViewController: UIViewController, DataStoreDelegate {
         DataStore.sharedInstance.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
         guard let movieIndex = movieIndex else {print("did not get movie index"); return}
-        DispatchQueue.global(qos: .background).async {
-            self.movie = DataStore.sharedInstance.updateMovieWithDetailedData(index: movieIndex)
-            print ("VC should have updated with detailed info: \(self.plotField.text) from \(self.movie?.plot)")
-            
-       }
+        //DispatchQueue.global(qos: .background).async {
+        
+        self.movie = DataStore.sharedInstance.updateMovieWithDetailedData(index: movieIndex)
+        
+           // print ("VC should have updated with detailed info: \(self.plotField.text) from \(self.movie?.plot)")
+        
+      // }
         self.displayInfo()
     }
     
@@ -53,8 +55,11 @@ class ViewController: UIViewController, DataStoreDelegate {
     }
     
     func updateWithNewMovies(movies: [Movie]) {
-        guard let movieIndex = movieIndex else {return}
-        movie = movies[movieIndex]
+//        print(movies)
+//        guard let movieIndex = movieIndex else {return}
+        print ("movie plot is \(movies[0].plot)")
+        movie = movies[0]
+        print ("VC updated with \(movie?.plot)")
         displayInfo()
     }
 }

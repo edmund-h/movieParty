@@ -47,7 +47,7 @@ class OmdbApiClient{
         let formattedTitle = temp.joined(separator: "+")
         let omdbAddr = "https://omdbapi.com/?t=" + formattedTitle
         let omdbURL = URL(string: omdbAddr)
-        DispatchQueue.global(qos: .background).async {
+      //  DispatchQueue.global(qos: .background).async {
             let session = URLSession.shared
             guard let omdbURLuw = omdbURL else {print("detailed OMDB info not retrieved"); return}
             print("url check complete")
@@ -65,7 +65,7 @@ class OmdbApiClient{
                 } catch {}
             }
             task.resume()
-        }//data is downloaded in background, off main queue
+      //  }//data is downloaded in background, off main queue
     }
     
     class func getImage(atUrl imageURLString: String, with completion: @escaping (Data) -> Void) {

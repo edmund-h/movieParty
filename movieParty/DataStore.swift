@@ -39,12 +39,19 @@ class DataStore: MovieSearchDelegate {
        
         let movieToUpdateIMDB = data["imdbID"]
         print("looking to add detailed info for movie imdbID: \(movieToUpdateIMDB)")
-        for var movie in movies {
+        for var (index,movie) in movies.enumerated() {
             if movie.imdbID == movieToUpdateIMDB {
                 print("Found movie to add details to: \(movie.title)")
                 let plot = data["Plot"] ?? ""
                 let genre = data["Genre"] ?? ""
                 movie.addDetailedInfo(plot: plot, genre: genre)
+                print("Added movie plot\(movie.plot) at \(index)")
+                guard let del = delegate else {return}
+                var movieToReturn = movie
+                movieToReturn.plot = plot
+                movieToReturn.genre = genre
+                del.updateWithNewMovies(movies: [movieToReturn])
+                return
             }
         }
     }
