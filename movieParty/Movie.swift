@@ -7,12 +7,18 @@
 //
 
 import Foundation
+import UIKit
 
-struct Movie {
+class Movie {
     let title: String
     let year: String
     let imdbID: String
     let posterURL: String
+    var plot: String? = nil
+    var genre: String? = nil
+    var movieImage = UIImage()
+
+    
     
     init(title: String, year: String, imdbID: String, posterURL: String) {
         self.title = title
@@ -21,5 +27,9 @@ struct Movie {
         self.posterURL = posterURL
     }
     
+    func addDetailedInfo(plot: String, genre: String) {
+        self.plot = plot
+        self.genre = genre
+    }
 
 }

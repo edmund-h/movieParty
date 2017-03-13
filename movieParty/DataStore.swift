@@ -15,6 +15,7 @@ class DataStore: MovieSearchDelegate {
     weak var delegate: DataStoreDelegate?
     
     
+    
     private init() {
         
     }
@@ -26,12 +27,29 @@ class DataStore: MovieSearchDelegate {
             let year = dictionary["Year"] as? String ?? ""
             let imdbID = dictionary["imdbID"] as? String ?? ""
             let posterURL = dictionary["Poster"] as? String ?? ""
-            let newMovie = Movie(title: title, year: year, imdbID: imdbID, posterURL: posterURL)
+            var newMovie = Movie(title: title, year: year, imdbID: imdbID, posterURL: posterURL)
             movies.append(newMovie)
-            print(newMovie.title)
         }
         print("data store is telling delegate to update with new movies")
         delegate?.updateWithNewMovies(movies: movies)
+    }
+    
+    func updateWithDetailedData(data: [String:String]) {
+       
+        let movieToUpdateIMDB = data["imdbID"]
+        print("looking to add detailed info for movie imdbID: \(movieToUpdateIMDB)")
+        for movie in movies {
+            if movie.imdbID == movieToUpdateIMDB {
+                print("Found movie to add details to: \(movie.title)")
+                let plot = data["Plot"] ?? ""
+                let genre = data["Genre"] ?? ""
+                movie.addDetailedInfo(plot: plot, genre: genre)
+            }
+        }
+    }
+    
+    func removeAllStoredMovies() {
+        self.movies = []
     }
     
     func getMovies() -> [Movie] {
