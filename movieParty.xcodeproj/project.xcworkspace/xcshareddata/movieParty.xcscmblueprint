@@ -1,0 +1,37 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "EA5B540CC8411651D490F806F915B8A965249846+++B64F277",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "EA5B540CC8411651D490F806F915B8A965249846+++B64F277" : 9223372036854775807,
+    "EA5B540CC8411651D490F806F915B8A965249846+++CE5C248" : 9223372036854775807,
+    "EA5B540CC8411651D490F806F915B8A965249846+++E85D013" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "4AFDD4B6-E8EC-4B1D-97F8-699DE32CD3EC",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "EA5B540CC8411651D490F806F915B8A965249846+++B64F277" : "movieParty\/",
+    "EA5B540CC8411651D490F806F915B8A965249846+++CE5C248" : "movieParty\/movieParty\/",
+    "EA5B540CC8411651D490F806F915B8A965249846+++E85D013" : "movieParty\/movieParty\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "movieParty",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "movieParty.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:edmund-h\/movieParty.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "EA5B540CC8411651D490F806F915B8A965249846+++B64F277"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:edmund-h\/movieParty.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "EA5B540CC8411651D490F806F915B8A965249846+++CE5C248"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:edmund-h\/movieParty.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "EA5B540CC8411651D490F806F915B8A965249846+++E85D013"
+    }
+  ]
+}

@@ -6,6 +6,7 @@
 //  Copyright © 2017 Dawn Trigger Entertainment. All rights reserved.
 //
 
+import UIKit
 import Foundation
 
 class DataStore: MovieSearchDelegate {
@@ -38,7 +39,7 @@ class DataStore: MovieSearchDelegate {
        
         let movieToUpdateIMDB = data["imdbID"]
         print("looking to add detailed info for movie imdbID: \(movieToUpdateIMDB)")
-        for movie in movies {
+        for var movie in movies {
             if movie.imdbID == movieToUpdateIMDB {
                 print("Found movie to add details to: \(movie.title)")
                 let plot = data["Plot"] ?? ""
@@ -55,8 +56,19 @@ class DataStore: MovieSearchDelegate {
     func getMovies() -> [Movie] {
         return movies
     }
+    
+    func updateWithMovieImage (imageToAdd: UIImage, index: Int){
+        self.movies[index].movieImage = imageToAdd
+    }
+    
+    func updateMovieWithDetailedData (index: Int)-> Movie {
+        print ("calling APIclient to get new data")
+        OmdbApiClient.getDetailedInfo(forTitle: self.movies[index].title)
+        return movies[index]
+    }
 }
 
 protocol DataStoreDelegate: class {
     func updateWithNewMovies(movies: [Movie])
 }
+

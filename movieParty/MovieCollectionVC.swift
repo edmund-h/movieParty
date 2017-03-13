@@ -15,6 +15,7 @@ class MovieCollectionVC: UICollectionViewController, DataStoreDelegate {
     let store = DataStore.sharedInstance
     var movies: [Movie] = []
     weak var globalMovieSearchBar: UISearchBar!
+    @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var activityInd: UIActivityIndicatorView!
     let screenWidth = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
@@ -30,6 +31,11 @@ class MovieCollectionVC: UICollectionViewController, DataStoreDelegate {
         layoutCells()
         store.delegate = self
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        store.delegate = self
+    }
  
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return movies.count
@@ -37,8 +43,14 @@ class MovieCollectionVC: UICollectionViewController, DataStoreDelegate {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CollectionCellView
-        cell.movie = movies[indexPath.item]
-
+        let movieToAdd = movies[indexPath.item]
+        cell.movie = movieToAdd
+        cell.getImageForCell(atURLString: movieToAdd.posterURL, completion: { (image) in
+            cell.movie?.movieImage = image
+            cell.moviePosterImage.image = image
+            self.movies[indexPath.item].movieImage = image
+            DataStore.sharedInstance.updateWithMovieImage (imageToAdd: image, index: indexPath.item)
+        })
         return cell
     }
 
@@ -47,8 +59,6 @@ class MovieCollectionVC: UICollectionViewController, DataStoreDelegate {
         self.collectionView?.reloadData()
     }
     
-    //TODO: implement image searching for onscreen cells
-    
     @IBAction func searchButtonPressed(_ sender: UIBarButtonItem) {
         activityInd.isHidden = false
         activityInd.startAnimating()
@@ -56,62 +66,19 @@ class MovieCollectionVC: UICollectionViewController, DataStoreDelegate {
         globalMovieSearchBar.text = ""
         movies = []
         store.removeAllStoredMovies()
-        DispatchQueue.global(qos: .background).async{
+        //DispatchQueue.global(qos: .background).async{
             OmdbApiClient.getMeSomeMovies(titleSearch: searchString)
                 self.collectionView?.reloadData()
                 self.activityInd.stopAnimating()
                 self.activityInd.isHidden = true
-       }
+      // }
     }
-    
-<<<<<<< HEAD
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let origin = sender as? CollectionCellView else {return}
-        guard let movieToDisplay = origin.movie else {return}
-        DispatchQueue.main.async {
-            OmdbApiClient.getASpecificMovie(titleSearch: movieToDisplay.title)
-        }
-    }//segue preparation triggers search for add'tl info.
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
     // MARK: UICollectionViewDelegate
 
 
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-=======
     func layoutCells() {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 10, right: 0)
@@ -119,21 +86,16 @@ class MovieCollectionVC: UICollectionViewController, DataStoreDelegate {
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         collectionView?.collectionViewLayout = layout
->>>>>>> 2caed7e0aa940756c8d5a531d2fa7720fa60a8d5
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == "movieDetailSegue" else {print("segue identifier error"); return}
         let indexPaths = self.collectionView?.indexPathsForSelectedItems
         if let selectedCellNumber = indexPaths?[0].item {
-            DispatchQueue.global(qos: .background).async {
-                OmdbApiClient.getDetailedInfo(forTitle: self.movies[selectedCellNumber].title)
-                DispatchQueue.main.async {
-                    let dest = segue.destination as! ViewController
-                    dest.movie = self.movies[selectedCellNumber]
-                }
-            }
-            
+            let dest = segue.destination as! ViewController
+            dest.movie = self.movies[selectedCellNumber]
+            dest.movieIndex = selectedCellNumber
         }
     }
 }

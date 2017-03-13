@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class Movie {
+struct Movie {
     let title: String
     let year: String
     let imdbID: String
@@ -27,7 +27,7 @@ class Movie {
         self.posterURL = posterURL
     }
     
-    func addDetailedInfo(plot: String, genre: String) {
+    mutating func addDetailedInfo(plot: String, genre: String) {
         self.plot = plot
         self.genre = genre
     }

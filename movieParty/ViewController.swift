@@ -8,9 +8,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, DataStoreDelegate {
     
     var movie: Movie? = nil
+    var movieIndex: Int? = nil
     @IBOutlet weak var posterImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var genreLabel: UILabel!
@@ -19,7 +20,15 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.    
+        DataStore.sharedInstance.delegate = self
+        // Do any additional setup after loading the view, typically from a nib.
+        guard let movieIndex = movieIndex else {print("did not get movie index"); return}
+        DispatchQueue.global(qos: .background).async {
+            self.movie = DataStore.sharedInstance.updateMovieWithDetailedData(index: movieIndex)
+            print ("VC should have updated with detailed info: \(self.plotField.text) from \(self.movie?.plot)")
+            
+       }
+        self.displayInfo()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -41,6 +50,12 @@ class ViewController: UIViewController {
             self.yearLabel.alpha = 1
             self.posterImage.alpha = 1
         }
+    }
+    
+    func updateWithNewMovies(movies: [Movie]) {
+        guard let movieIndex = movieIndex else {return}
+        movie = movies[movieIndex]
+        displayInfo()
     }
 }
 
